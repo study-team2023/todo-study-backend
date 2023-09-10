@@ -1,0 +1,11 @@
+@server = http://localhost:3000
+
+### 유저 생성
+POST {{server}}/user/create
+Content-Type: application/json
+
+{
+    "email": "gg@gmail.com",
+    "password": "test1234",
+    "name": "오이조아"
+}
