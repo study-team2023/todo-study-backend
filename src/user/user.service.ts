@@ -12,7 +12,7 @@ export class UserService {
       throw new UnauthorizedException('이미 존재하는 유저입니다.');
     }
 
-    this.userRepository.createUser(user);
+    return this.userRepository.createUser(user);
   }
 
   async getUser(email: string) {
