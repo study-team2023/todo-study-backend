@@ -9,4 +9,8 @@ export class UserService {
   createUser(user: CreateUserDto) {
     this.userRepository.createUser(user);
   }
+
+  async getUser(email: string) {
+    return await this.userRepository.getUser(email);
+  }
 }

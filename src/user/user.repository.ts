@@ -21,4 +21,10 @@ export class UserMongoRepository implements UserRepository {
 
     this.userModel.create(createUser);
   }
+
+  async getUser(email: string) {
+    const result = await this.userModel.findOne({ email }).exec();
+
+    return result;
+  }
 }
