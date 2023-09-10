@@ -19,5 +19,8 @@ Content-Type: application/json
 
 {   
     "password": "test123456789",
-    "username": "매미조아"
+    "username": "콜라조아"
 }
+
+### 유저 삭제
+DELETE {{server}}/user/delete/gg@gmail.com

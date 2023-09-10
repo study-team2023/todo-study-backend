@@ -18,4 +18,8 @@ export class UserService {
   updateUser(email: string, user: User) {
     return this.userRepository.updateUser(email, user);
   }
+
+  deleteUser(email: string) {
+    return this.userRepository.deleteUser(email);
+  }
 }

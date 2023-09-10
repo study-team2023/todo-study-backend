@@ -19,7 +19,7 @@ export class UserMongoRepository implements UserRepository {
       updatedAt: new Date(),
     };
 
-    this.userModel.create(createUser);
+    return this.userModel.create(createUser);
   }
 
   async getUser(email: string) {
@@ -27,11 +27,15 @@ export class UserMongoRepository implements UserRepository {
     return result;
   }
 
-  async updateUser(email: string, _user: User) {
+  updateUser(email: string, _user: User) {
     return this.userModel.findOneAndUpdate(
       { email },
       { $set: { ..._user, updatedAt: new Date() } },
       { new: true },
     );
+  }
+
+  deleteUser(email: string) {
+    return this.userModel.deleteOne({ email });
   }
 }
