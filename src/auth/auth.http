@@ -1,0 +1,11 @@
+@server = http://localhost:3000
+
+### 회원 가입
+POST {{server}}/auth/register
+Content-Type: application/json
+
+{
+    "username": "Lee",
+    "password": "test1234",
+    "email": "test@naver.com"
+}
