@@ -1,13 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserMongoRepository } from './user.repository';
 import { CreateUserDto } from './user.dto';
-import { User } from './user.schema';
 
 @Injectable()
 export class UserService {
   constructor(private userRepository: UserMongoRepository) {}
 
-  createUser(user: CreateUserDto) {
+  async createUser(user: CreateUserDto) {
+    const hasUser = await this.userRepository.getUser(user.email);
+    if (hasUser) {
+      throw new UnauthorizedException('이미 존재하는 유저입니다.');
+    }
+
     this.userRepository.createUser(user);
   }
 
@@ -15,7 +19,7 @@ export class UserService {
     return await this.userRepository.getUser(email);
   }
 
-  updateUser(email: string, user: User) {
+  updateUser(email: string, user) {
     return this.userRepository.updateUser(email, user);
   }
 

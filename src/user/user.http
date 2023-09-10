@@ -17,9 +17,8 @@ GET {{server}}/user/getUser/gg@gmail.com
 PUT {{server}}/user/update/gg@gmail.com
 Content-Type: application/json
 
-{   
-    "password": "test123456789",
-    "username": "콜라조아"
+{
+    "username": "쏘카조아"
 }
 
 ### 유저 삭제

@@ -1,8 +1,7 @@
 import { Post, Body, Get, Param, Put, Delete } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './user.dto';
-import { User } from './user.schema';
+import { CreateUserDto, UpdateUserDto } from './user.dto';
 
 @Controller('user')
 export class UserController {
@@ -20,7 +19,7 @@ export class UserController {
   }
 
   @Put('/update/:email')
-  updateUser(@Param('email') email: string, @Body() user: User) {
+  updateUser(@Param('email') email: string, @Body() user: UpdateUserDto) {
     return this.userService.updateUser(email, user);
   }
 

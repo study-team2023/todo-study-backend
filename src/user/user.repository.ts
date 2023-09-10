@@ -27,7 +27,7 @@ export class UserMongoRepository implements UserRepository {
     return result;
   }
 
-  updateUser(email: string, _user: User) {
+  updateUser(email: string, _user) {
     return this.userModel.findOneAndUpdate(
       { email },
       { $set: { ..._user, updatedAt: new Date() } },
