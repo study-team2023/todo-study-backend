@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UserMongoRepository } from './user.repository';
 import { CreateUserDto } from './user.dto';
+import { User } from './user.schema';
 
 @Injectable()
 export class UserService {
@@ -12,5 +13,9 @@ export class UserService {
 
   async getUser(email: string) {
     return await this.userRepository.getUser(email);
+  }
+
+  updateUser(email: string, user: User) {
+    return this.userRepository.updateUser(email, user);
   }
 }

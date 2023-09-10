@@ -24,7 +24,14 @@ export class UserMongoRepository implements UserRepository {
 
   async getUser(email: string) {
     const result = await this.userModel.findOne({ email }).exec();
-
     return result;
+  }
+
+  async updateUser(email: string, _user: User) {
+    return this.userModel.findOneAndUpdate(
+      { email },
+      { $set: { ..._user, updatedAt: new Date() } },
+      { new: true },
+    );
   }
 }
