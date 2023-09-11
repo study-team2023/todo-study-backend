@@ -11,7 +11,7 @@ Content-Type: application/json
 }
 
 ### 유저 정보 찾기
-GET {{server}}/user/getUser/gg@gmail.com
+GET {{server}}/user/getUser/test@naver.com
 
 ### 유저 업데이트
 PUT {{server}}/user/update/gg@gmail.com

@@ -1,9 +1,12 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory, SchemaOptions } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 export type UserDocument = User & Document;
 
-@Schema()
+const options: SchemaOptions = {
+  timestamps: true,
+};
+@Schema(options)
 export class User {
   @Prop({ required: true })
   username: string;
@@ -13,12 +16,6 @@ export class User {
 
   @Prop({ required: true })
   password: string;
-
-  @Prop()
-  createdAt: Date;
-
-  @Prop()
-  updatedAt: Date;
 
   @Prop({ default: false })
   admin: boolean;

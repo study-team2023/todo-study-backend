@@ -18,14 +18,12 @@ export class UserMongoRepository implements UserRepository {
   createUser(user: CreateUserDto): Promise<User> {
     const createUser = {
       ...user,
-      createdAt: new Date(),
-      updatedAt: new Date(),
     };
 
     return this.userModel.create(createUser);
   }
 
-  async getUser(email: string): Promise<User> {
+  async getUser(email: string): Promise<UserDocument> {
     const result = await this.userModel.findOne({ email }).exec();
     return result;
   }
