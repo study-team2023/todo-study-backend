@@ -9,3 +9,27 @@ Content-Type: application/json
     "password": "test1234",
     "email": "test@naver.com"
 }
+
+### 로그인
+POST  {{server}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "test@naver.com",
+    "password": "test1234"
+}
+
+### 프로필 확인
+GET  {{server}}/auth/profile
+
+### 프로필 확인2
+GET {{server}}/auth/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NGZlOGFiNDRiNGVmODBiMzdmOGVkYjMiLCJ1c2VybmFtZSI6IkxlZSIsImFkbWluIjpmYWxzZSwiaWF0IjoxNjk0NDM1Mzk1LCJleHAiOjE2OTQ0MzU0MjV9.qCDdSSb7uidjizSynwWeYIJQlFfysE7dZaP2UjGnGZI
+
+### 리프레쉬 토큰 테스트
+POST  {{server}}/auth/refresh
+Content-Type: application/json
+
+{
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NGZlOGFiNDRiNGVmODBiMzdmOGVkYjMiLCJ1c2VybmFtZSI6IkxlZSIsImFkbWluIjpmYWxzZSwiaWF0IjoxNjk0NDM1MzYzLCJleHAiOjE2OTUwNDAxNjN9.2TVtO5_cWJnMU9Z8h0o8048DUE33GqAyOX_mjrv9jwA"
+}
