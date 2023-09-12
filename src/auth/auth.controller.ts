@@ -4,6 +4,7 @@ import {
   Post,
   Body,
   Request,
+  Response,
   HttpCode,
   HttpStatus,
   UseGuards,
@@ -13,10 +14,14 @@ import { CreateUserDto } from 'src/user/user.dto';
 import { Public } from './decorator/public.decorator';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { RefreshJwtAuthGuard } from './guards/refresh-jwt-auth.guard';
+import { JwtService } from '@nestjs/jwt';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private jwtService: JwtService,
+  ) {}
 
   @Public()
   @Post('/register')
@@ -28,9 +33,24 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @HttpCode(HttpStatus.OK)
   @Post('/login')
-  async login(@Request() req) {
-    // console.log(req.user);
-    return await this.authService.login(req.user);
+  async login(@Request() req, @Response() res) {
+    const payload = {
+      userId: req.user._id,
+      username: req.user.username,
+      admin: req.user.admin,
+    };
+
+    const access_token = await this.jwtService.signAsync(payload);
+    const refresh_token = await this.jwtService.signAsync(payload, {
+      expiresIn: '7d',
+    });
+
+    res.cookie('refresh', refresh_token, {
+      httpOnly: true,
+      sameSite: 'strict',
+    });
+
+    return res.send({ access_token });
   }
 
   @Get('/profile')
