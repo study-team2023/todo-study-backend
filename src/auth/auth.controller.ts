@@ -50,7 +50,7 @@ export class AuthController {
       sameSite: 'strict',
     });
 
-    return res.send({ access_token });
+    return res.send({ message: '로그인에 성공했습니다.', access_token });
   }
 
   @Get('/profile')
@@ -63,5 +63,15 @@ export class AuthController {
   @Post('/refresh')
   async refreshToken(@Request() req) {
     return await this.authService.refreshToken(req.user);
+  }
+
+  @Public()
+  @Post('/logout')
+  logout(@Response() res) {
+    res.cookie('refresh', '', {
+      httpOnly: true,
+      expires: new Date(0), // 만료일을 과거로 설정
+    });
+    return res.send({ message: '로그아웃 되었습니다.' });
   }
 }

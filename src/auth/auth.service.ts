@@ -33,9 +33,9 @@ export class AuthService {
 
       user.password = undefined;
 
-      return user;
+      return { message: '회원가입에 성공했습니다.', user };
     } catch (error) {
-      throw new InternalServerErrorException('서버 에러');
+      throw new InternalServerErrorException('server error');
     }
   }
 
