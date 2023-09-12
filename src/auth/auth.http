@@ -24,7 +24,8 @@ GET  {{server}}/auth/profile
 
 ### 프로필 확인2
 GET {{server}}/auth/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGZlOGFiNDRiNGVmODBiMzdmOGVkYjMiLCJ1c2VybmFtZSI6IkxlZSIsImFkbWluIjpmYWxzZSwiaWF0IjoxNjk0NDkwNDMzLCJleHAiOjE2OTQ0OTA0NDN9.0Q2CdlFtZ-EMFvnqtROCOdbtzaSvmWNWvLZvEmXHG1o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGZmZWU2YmQxODNlMTRjYTIxZTJlZjciLCJ1c2VybmFtZSI6IkxlZSIsImFkbWluIjpmYWxzZSwiaWF0IjoxNjk0NTA5MDEyLCJleHAiOjE2OTQ1MTA4MTJ9.XMbH055w-gFjKxvFui5OOysp3C2VqkuANVU5ckgveZY
+
 
 ### 리프레쉬 토큰 테스트
 POST  {{server}}/auth/refresh
@@ -41,3 +42,5 @@ credentials: 'include'
 
 ### 로그아웃 테스트
 POST  {{server}}/auth/logout
+
+

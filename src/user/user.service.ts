@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UserMongoRepository } from './user.repository';
 import { CreateUserDto } from './user.dto';
+import { User } from './user.schema';
 
 @Injectable()
 export class UserService {
@@ -20,5 +21,21 @@ export class UserService {
 
   deleteUser(email: string) {
     return this.userRepository.deleteUser(email);
+  }
+
+  async findByEmailOrSave(email, username, providerId): Promise<User> {
+    const foundUser = await this.getUser(email);
+
+    if (foundUser) {
+      return foundUser;
+    }
+
+    const newUser = await this.userRepository.createUser({
+      email,
+      username,
+      providerId,
+    });
+
+    return newUser;
   }
 }

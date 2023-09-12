@@ -10,8 +10,12 @@ export class CreateUserDto {
   email: string;
 
   @IsString()
-  @IsNotEmpty()
-  password: string;
+  @IsOptional()
+  password?: string;
+
+  @IsString()
+  @IsOptional()
+  providerId?: string;
 }
 
 export class UpdateUserDto {
@@ -22,4 +26,8 @@ export class UpdateUserDto {
   @IsString()
   @IsOptional()
   password?: string;
+
+  @IsString()
+  @IsOptional()
+  providerId?: string;
 }

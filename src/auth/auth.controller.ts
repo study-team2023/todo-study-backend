@@ -15,6 +15,7 @@ import { Public } from './decorator/public.decorator';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { RefreshJwtAuthGuard } from './guards/refresh-jwt-auth.guard';
 import { JwtService } from '@nestjs/jwt';
+import { GoogleAuthGuard } from './guards/google-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -34,10 +35,11 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post('/login')
   async login(@Request() req, @Response() res) {
+    const { user } = req;
     const payload = {
-      userId: req.user._id,
-      username: req.user.username,
-      admin: req.user.admin,
+      userId: user._id,
+      username: user.username,
+      admin: user.admin,
     };
 
     const access_token = await this.jwtService.signAsync(payload);
@@ -73,5 +75,18 @@ export class AuthController {
       expires: new Date(0), // 만료일을 과거로 설정
     });
     return res.send({ message: '로그아웃 되었습니다.' });
+  }
+
+  @Public()
+  @Get('/to-google')
+  @UseGuards(GoogleAuthGuard)
+  async googleAuth(@Request() req) {}
+
+  @Public()
+  @Get('/google')
+  @UseGuards(GoogleAuthGuard)
+  async googleAuthRedirect(@Request() req, @Response() res) {
+    const { user } = req;
+    return res.send(user);
   }
 }
