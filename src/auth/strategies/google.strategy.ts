@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { PassportStrategy } from '@nestjs/passport';
 import { Profile, Strategy } from 'passport-google-oauth20';
+import { PassportStrategy } from '@nestjs/passport';
 import { User } from 'src/user/user.schema';
 import { UserService } from 'src/user/user.service';
 import { googleCallbackUrl } from '../constants';

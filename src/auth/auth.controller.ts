@@ -11,18 +11,14 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from 'src/user/user.dto';
-import { Public } from './decorator/public.decorator';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { RefreshJwtAuthGuard } from './guards/refresh-jwt-auth.guard';
-import { JwtService } from '@nestjs/jwt';
 import { GoogleAuthGuard } from './guards/google-auth.guard';
+import { Public } from './decorator/public.decorator';
 
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private authService: AuthService,
-    private jwtService: JwtService,
-  ) {}
+  constructor(private authService: AuthService) {}
 
   @Public()
   @Post('/register')
@@ -35,24 +31,7 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post('/login')
   async login(@Request() req, @Response() res) {
-    const { user } = req;
-    const payload = {
-      userId: user._id,
-      username: user.username,
-      admin: user.admin,
-    };
-
-    const access_token = await this.jwtService.signAsync(payload);
-    const refresh_token = await this.jwtService.signAsync(payload, {
-      expiresIn: '7d',
-    });
-
-    res.cookie('refresh', refresh_token, {
-      httpOnly: true,
-      sameSite: 'strict',
-    });
-
-    return res.send({ message: '로그인에 성공했습니다.', access_token });
+    return await this.authService.login({ req, res });
   }
 
   @Get('/profile')
@@ -67,7 +46,6 @@ export class AuthController {
     return await this.authService.refreshToken(req.user);
   }
 
-  @Public()
   @Post('/logout')
   logout(@Response() res) {
     res.cookie('refresh', '', {
@@ -86,7 +64,6 @@ export class AuthController {
   @Get('/google')
   @UseGuards(GoogleAuthGuard)
   async googleAuthRedirect(@Request() req, @Response() res) {
-    const { user } = req;
-    return res.send(user);
+    return await this.authService.googleAuth({ req, res });
   }
 }

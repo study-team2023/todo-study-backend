@@ -10,7 +10,6 @@ import { UserModule } from 'src/user/user.module';
 import { AuthService } from './auth.service';
 import { jwtConstants } from './constants';
 import { GoogleStrategy } from './strategies/google.strategy';
-import { SessionSerializer } from './session.serializer';
 import { PassportModule } from '@nestjs/passport';
 
 @Module({
@@ -28,7 +27,6 @@ import { PassportModule } from '@nestjs/passport';
     LocalStrategy,
     JwtStrategy,
     RefreshJwtStrategy,
-    SessionSerializer,
     GoogleStrategy,
     {
       provide: APP_GUARD,

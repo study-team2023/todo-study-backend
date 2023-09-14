@@ -8,6 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from 'src/user/user.dto';
 import { UserService } from 'src/user/user.service';
+import { mainUrl } from './constants';
 
 @Injectable()
 export class AuthService {
@@ -66,5 +67,49 @@ export class AuthService {
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
+  }
+
+  async login({ req, res }) {
+    const { user } = req;
+    const payload = {
+      userId: user._id,
+      username: user.username,
+      admin: user.admin,
+    };
+
+    const access_token = await this.jwtService.signAsync(payload);
+    const refresh_token = await this.jwtService.signAsync(payload, {
+      expiresIn: '7d',
+    });
+
+    res.cookie('refresh', refresh_token, {
+      httpOnly: true,
+      sameSite: 'lax', // none으로 설정
+      secure: false, // 로컬 환경에서는 false 혹은 제거
+    });
+
+    return res.send({ message: '로그인에 성공했습니다.', access_token });
+  }
+
+  async googleAuth({ req, res }) {
+    const { user } = req;
+
+    const payload = {
+      userId: user._id,
+      username: user.username,
+      admin: user.admin,
+    };
+
+    const refresh_token = this.jwtService.sign(payload, {
+      expiresIn: '7d',
+    });
+
+    res.cookie('refresh', refresh_token, {
+      httpOnly: true,
+      sameSite: 'lax',
+      secure: false,
+    });
+
+    res.redirect(mainUrl);
   }
 }
