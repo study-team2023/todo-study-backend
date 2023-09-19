@@ -115,7 +115,7 @@ export class AuthController {
   @ApiParam({
     name: 'url',
     description:
-      '예시 : http://localhost:3000/auth/to-google 형태로 a링크를 사용한다.(배포했을 경우: localhost가 아닌 실제주소 입력)',
+      '예시 : http://localhost:4000/auth/to-google 형태로 a링크를 사용한다.(배포했을 경우: localhost가 아닌 실제주소 입력)',
     required: true,
   })
   async googleAuth(@Request() req) {}
