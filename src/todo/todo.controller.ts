@@ -65,7 +65,7 @@ export class TodoController {
   @ApiParam({
     name: 'id',
     description:
-      '투두의 id를 http://localhost:4000/todo/{투두의 id} url로 요청한다. ({투두의 id}: 실제 투두아이디를 보내야 합니다.)',
+      '투두의 id를 http://localhost:3000/todo/{투두의 id} url로 요청한다. ({투두의 id}: 실제 투두아이디를 보내야 합니다.)',
     required: true,
   })
   getTodo(@Param('id') id) {
@@ -85,7 +85,7 @@ export class TodoController {
   @ApiParam({
     name: 'id',
     description:
-      '투두의 id를 http://localhost:4000/todo/{투두의 id} url로 요청한다. ({투두의 id}: 실제 투두아이디를 보내야 합니다.)',
+      '투두의 id를 http://localhost:3000/todo/{투두의 id} url로 요청한다. ({투두의 id}: 실제 투두아이디를 보내야 합니다.)',
     required: true,
   })
   deleteTodo(@Param('id') id) {
@@ -105,7 +105,7 @@ export class TodoController {
   @ApiParam({
     name: 'id',
     description:
-      '투두의 id를 http://localhost:4000/todo/{투두의 id} url로 요청한다. ({투두의 id}: 실제 투두아이디를 보내야 합니다.)',
+      '투두의 id를 http://localhost:3000/todo/{투두의 id} url로 요청한다. ({투두의 id}: 실제 투두아이디를 보내야 합니다.)',
     required: true,
   })
   @ApiBody({

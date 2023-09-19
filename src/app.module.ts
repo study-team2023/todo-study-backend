@@ -9,7 +9,6 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { TodoModule } from './todo/todo.module';
 
-console.log(process.env.MONGODB_URL);
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
