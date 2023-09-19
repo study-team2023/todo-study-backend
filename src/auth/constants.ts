@@ -9,5 +9,3 @@ export const googleCallbackUrl =
 
 export const mainUrl =
   process.env.NODE_ENV == 'production' ? '' : 'http://localhost:3000';
-
-export const MongoDBUrl = `${process.env.MONGODB_URL}`;

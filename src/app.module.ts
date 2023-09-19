@@ -8,12 +8,12 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { TodoModule } from './todo/todo.module';
-import { MongoDBUrl } from './auth/constants';
 
+console.log(process.env.MONGODB_URL);
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    MongooseModule.forRoot(MongoDBUrl),
+    MongooseModule.forRoot(process.env.MONGODB_URL),
     UserModule,
     AuthModule,
     TodoModule,

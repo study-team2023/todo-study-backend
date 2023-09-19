@@ -7,6 +7,14 @@ import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.useGlobalPipes(new ValidationPipe());
+  app.use(cookieParser());
+  app.enableCors({
+    origin: mainUrl,
+    credentials: true,
+  });
+
   const config = new DocumentBuilder()
     .setTitle('투두리스트 스터디')
     .setDescription('프로젝트 들어가기 전의 사이드 프로젝트')
@@ -14,12 +22,6 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-  app.useGlobalPipes(new ValidationPipe());
-  app.use(cookieParser());
-  app.enableCors({
-    origin: mainUrl,
-    credentials: true,
-  });
   await app.listen(4000);
 }
 bootstrap();
