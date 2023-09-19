@@ -12,7 +12,7 @@ import { TodoModule } from './todo/todo.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    MongooseModule.forRoot(process.env.MONGODB_URL),
+    MongooseModule.forRoot(`${process.env.MONGODB_URL}`),
     UserModule,
     AuthModule,
     TodoModule,
