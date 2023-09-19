@@ -5,7 +5,7 @@ export const jwtConstants = {
 export const googleCallbackUrl =
   process.env.NODE_ENV == 'production'
     ? 'https://port-0-meta-be-30yyr422almfhq6h4.sel5.cloudtype.app'
-    : 'http://localhost:3000';
+    : 'http://localhost:4000';
 
 export const mainUrl =
-  process.env.NODE_ENV == 'production' ? '' : 'http://localhost:5173';
+  process.env.NODE_ENV == 'production' ? '' : 'http://localhost:3000';
