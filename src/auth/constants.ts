@@ -8,4 +8,6 @@ export const googleCallbackUrl =
     : 'http://localhost:4000';
 
 export const mainUrl =
-  process.env.NODE_ENV == 'production' ? '' : 'http://localhost:3000';
+  process.env.NODE_ENV == 'production'
+    ? 'http://localhost:3000'
+    : 'http://localhost:3000';
